@@ -6,5 +6,8 @@
   "version": "1.0.0",
   "author": "@r.markelov52",
   "platforms": ["ios", "android", "web"],
-  "permissions": ["storage", "wall", "friends", "photos"]
+  "permissions": ["storage", "wall", "friends", "photos", "notifications"],
+  "oauth": {
+    "scope": "friends,photos,wall,offline"
+  }
 }
