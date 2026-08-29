@@ -6,7 +6,6 @@
     <title>EGGMONEY</title>
     <script src="https://vk.com/js/api/openapi.js?169"></script>
     <style>
-        /* ===== ВСЕ СТИЛИ (те же что и были) ===== */
         * {
             margin: 0;
             padding: 0;
@@ -97,9 +96,14 @@
         .login-page .login-logo {
             font-size: 80px;
             margin-bottom: 20px;
+            animation: floatLogo 3s ease-in-out infinite;
+        }
+        @keyframes floatLogo {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
         .login-page .login-title {
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 800;
             background: linear-gradient(135deg, #feda75 0%, #ff8a5c 50%, #ff6b6b 100%);
             -webkit-background-clip: text;
@@ -123,15 +127,21 @@
             transition: 0.15s;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
         .login-btn:active {
             transform: translateY(4px);
             box-shadow: none;
         }
-        .login-btn img {
-            width: 24px;
-            height: 24px;
+        .login-btn svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
+        }
+        .login-page .login-hint {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #555;
         }
 
         /* ===== СТРАНИЦЫ ИГРЫ ===== */
@@ -773,18 +783,17 @@
         .gift-input input::placeholder { color: #555; }
         .gift-input input:focus { outline: none; border-color: #ffd700; }
 
-        /* ===== ВЫХОД ИЗ АККАУНТА ===== */
         .logout-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             color: #888;
-            padding: 4px 12px;
-            border-radius: 16px;
+            padding: 3px 10px;
+            border-radius: 14px;
             font-size: 10px;
             cursor: pointer;
             transition: 0.2s;
         }
-        .logout-btn:active { transform: scale(0.95); background: rgba(255, 0, 0, 0.1); }
+        .logout-btn:active { transform: scale(0.9); background: rgba(255, 0, 0, 0.15); }
     </style>
 </head>
 <body>
@@ -807,14 +816,10 @@
                     <div class="login-title">EGGMONEY</div>
                     <div class="login-subtitle">Кликер-РПГ с кейсами и скинами</div>
                     <button class="login-btn" id="loginBtn">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-                            <path d="M12 0C5.373 0 0 5.373 0 12c0 6.016 4.432 10.984 10.206 11.852V15.18H7.237v-3.18h2.969V9.55c0-3.065 1.755-4.78 4.45-4.78 1.28 0 2.62.24 2.62.24v2.9h-1.475c-1.455 0-1.91.905-1.91 1.834v2.256h3.25l-.52 3.18h-2.73v8.672C19.568 22.984 24 18.016 24 12c0-6.627-5.373-12-12-12z"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12c0 6.016 4.432 10.984 10.206 11.852V15.18H7.237v-3.18h2.969V9.55c0-3.065 1.755-4.78 4.45-4.78 1.28 0 2.62.24 2.62.24v2.9h-1.475c-1.455 0-1.91.905-1.91 1.834v2.256h3.25l-.52 3.18h-2.73v8.672C19.568 22.984 24 18.016 24 12c0-6.627-5.373-12-12-12z"/></svg>
                         Войти через VK
                     </button>
-                    <div style="margin-top:20px;font-size:12px;color:#555;">
-                        🔒 Безопасный вход через VK ID
-                    </div>
+                    <div class="login-hint">🔒 Безопасный вход через VK ID</div>
                 </div>
             </div>
 
@@ -861,10 +866,9 @@
                 </div>
             </div>
 
-            <!-- ===== СТРАНИЦА КЕЙСЫ ===== -->
+            <!-- ===== КЕЙСЫ ===== -->
             <div class="page cases-page" id="page-cases">
                 <h3 style="margin:8px 0 12px;font-size:16px;">📦 Кейсы</h3>
-
                 <div class="case-category">
                     <div class="case-category-title">⭐ Базовые кейсы</div>
                     <div class="cases-grid">
@@ -891,18 +895,16 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="drop-preview" id="dropPreview">
+                <div class="drop-preview">
                     <div class="drop-title">🎯 Что может выпасть:</div>
                     <div class="drop-items" id="dropItems"></div>
                 </div>
-
                 <div style="font-size:11px;color:#666;text-align:center;margin-top:8px;">
                     💡 В кейсах можно получить: скины, монеты (500-3000) или силу (+1-3)
                 </div>
             </div>
 
-            <!-- ===== СТРАНИЦА БОНУСЫ ===== -->
+            <!-- ===== БОНУСЫ ===== -->
             <div class="page" id="page-bonus">
                 <h3 style="margin:8px 0 4px;font-size:16px;">🎁 Бонусы</h3>
                 <div class="bonus-grid">
@@ -935,7 +937,7 @@
                 </div>
             </div>
 
-            <!-- ===== СТРАНИЦА ИНВЕНТАРЬ ===== -->
+            <!-- ===== ИНВЕНТАРЬ ===== -->
             <div class="page" id="page-inventory">
                 <h3 style="margin:8px 0 4px;font-size:16px;">🎒 Инвентарь</h3>
                 <div style="font-size:11px;color:#666;margin-bottom:6px;">Нажми на скин для действий</div>
@@ -944,7 +946,7 @@
                 </div>
             </div>
 
-            <!-- ===== СТРАНИЦА ПРОФИЛЬ ===== -->
+            <!-- ===== ПРОФИЛЬ ===== -->
             <div class="page" id="page-profile">
                 <div class="profile-header">
                     <img class="profile-avatar" id="profileAvatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Ccircle cx='30' cy='30' r='30' fill='%23333'/%3E%3Ctext x='30' y='36' text-anchor='middle' fill='%23666' font-size='24' font-family='system-ui'%3E👤%3C/text%3E%3C/svg%3E" />
@@ -954,27 +956,15 @@
                         <div class="profile-id" id="profileId">ID: гость</div>
                     </div>
                 </div>
-
                 <div class="profile-stats">
-                    <div class="profile-stat">
-                        <div class="ps-value" id="profileCoins">0</div>
-                        <div class="ps-label">Монет</div>
-                    </div>
-                    <div class="profile-stat">
-                        <div class="ps-value" id="profileSkins">1</div>
-                        <div class="ps-label">Скинов</div>
-                    </div>
-                    <div class="profile-stat">
-                        <div class="ps-value" id="profileClicks">0</div>
-                        <div class="ps-label">Кликов</div>
-                    </div>
+                    <div class="profile-stat"><div class="ps-value" id="profileCoins">0</div><div class="ps-label">Монет</div></div>
+                    <div class="profile-stat"><div class="ps-value" id="profileSkins">1</div><div class="ps-label">Скинов</div></div>
+                    <div class="profile-stat"><div class="ps-value" id="profileClicks">0</div><div class="ps-label">Кликов</div></div>
                 </div>
-
                 <div class="profile-status-selector">
                     <div class="status-title">🎨 Установить статус (выбери скин из инвентаря)</div>
                     <div class="status-grid" id="statusGrid"></div>
                 </div>
-
                 <button class="share-btn" id="shareBtn">📤 Поделиться результатом</button>
                 <button class="share-btn" id="giftCoinsBtn" style="background:linear-gradient(135deg,#ff6f00,#e65100);box-shadow:0 3px 0 #bf360c;margin-top:6px;">🎁 Подарить монеты другу</button>
             </div>
@@ -1110,32 +1100,25 @@
         let isVKApp = false;
         let isLoggedIn = false;
 
-        // Проверяем, открыто ли в VK
         function checkVKApp() {
-            const url = window.location.href;
-            if (url.includes('vk.com') || url.includes('vk.ru') || url.includes('vk.me')) {
+            if (window.location.href.includes('vk.com') || window.location.href.includes('vk.ru')) {
                 isVKApp = true;
                 return true;
             }
-            // Проверяем через VK Bridge
             if (typeof VK !== 'undefined' && VK.WebApp) {
                 try {
-                    VK.WebApp.getUserInfo(() => {
-                        isVKApp = true;
-                        return true;
-                    });
+                    VK.WebApp.getUserInfo(() => { isVKApp = true; });
+                    return true;
                 } catch (e) {}
             }
             return false;
         }
 
-        // Вход через VK (для сайта)
         function loginViaVK() {
             if (typeof VK === 'undefined') {
-                alert('❌ Ошибка: VK API не загружен. Попробуйте обновить страницу.');
+                alert('❌ VK API не загружен. Обнови страницу.');
                 return;
             }
-
             try {
                 VK.WebApp.getUserInfo((data) => {
                     if (data && data.first_name) {
@@ -1147,20 +1130,18 @@
                         updateUserUI();
                         showToast('✅ Добро пожаловать, ' + vkUser.name + '!');
                         sound.play('bonus');
+                        localStorage.setItem('eggmony_user', JSON.stringify(vkUser));
                     }
                 });
             } catch (e) {
-                // Если VK WebApp не работает, пробуем OAuth
-                const clientId = '54742944'; // ID твоего приложения
-                const redirectUri = window.location.href;
-                const scope = '4194304'; // friends + photos + wall + offline
-                const vkAuthUrl =
-                `https://oauth.vk.com/authorize?client_id=${clientId}&display=page&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${scope}&response_type=token&v=5.199`;
-                window.location.href = vkAuthUrl;
+                const clientId = '54742944';
+                const redirectUri = window.location.origin + window.location.pathname;
+                const scope = 'friends,photos,wall,offline';
+                window.location.href =
+                    `https://oauth.vk.com/authorize?client_id=${clientId}&display=page&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${scope}&response_type=token&v=5.199`;
             }
         }
 
-        // Обработка OAuth (если вернулись с авторизации)
         function handleOAuth() {
             const hash = window.location.hash;
             if (hash && hash.includes('access_token')) {
@@ -1168,8 +1149,9 @@
                 const token = params.get('access_token');
                 const userId = params.get('user_id');
                 if (token && userId) {
-                    // Запрос данных пользователя
-                    fetch(`https://api.vk.com/method/users.get?user_ids=${userId}&fields=photo_50&access_token=${token}&v=5.199`)
+                    fetch(
+                            `https://api.vk.com/method/users.get?user_ids=${userId}&fields=photo_50&access_token=${token}&v=5.199`
+                            )
                         .then(res => res.json())
                         .then(data => {
                             if (data.response && data.response[0]) {
@@ -1182,21 +1164,15 @@
                                 updateUserUI();
                                 showToast('✅ Добро пожаловать, ' + vkUser.name + '!');
                                 sound.play('bonus');
-                                // Очищаем hash
+                                localStorage.setItem('eggmony_user', JSON.stringify(vkUser));
                                 window.history.replaceState({}, document.title, window.location.pathname);
                             }
                         })
-                        .catch(() => {
-                            // Если не получилось, показываем ошибку
-                            showToast('❌ Ошибка авторизации. Попробуйте снова.');
-                        });
+                        .catch(() => showToast('❌ Ошибка авторизации. Попробуйте снова.'));
                 }
             }
         }
 
-        // ============================================================
-        // 5. VK BRIDGE (для VK App)
-        // ============================================================
         function initVKBridge() {
             if (typeof VK !== 'undefined' && VK.WebApp) {
                 try {
@@ -1212,25 +1188,21 @@
                             updateUserUI();
                         }
                     });
-                } catch (e) {
-                    // Если не в VK, оставляем страницу входа
-                }
+                } catch (e) {}
             }
         }
 
         // ============================================================
-        // 6. ПОКАЗАТЬ/СКРЫТЬ СТРАНИЦЫ
+        // 5. УПРАВЛЕНИЕ СТРАНИЦАМИ
         // ============================================================
         function showGame() {
             document.getElementById('page-login').classList.remove('active');
             document.getElementById('page-clicker').classList.add('active');
             document.getElementById('bottomNav').style.display = 'grid';
             document.getElementById('logoutBtn').style.display = 'inline-block';
-            // Загружаем данные
             load();
             updateAll();
             startAutoClick();
-            // Демо друзья
             state.friends = [
                 { id: 1, name: 'Анна', online: true },
                 { id: 2, name: 'Максим', online: false },
@@ -1245,29 +1217,20 @@
             document.getElementById('logoutBtn').style.display = 'none';
         }
 
-        // ============================================================
-        // 7. ВЫХОД
-        // ============================================================
         function logout() {
             if (confirm('Выйти из аккаунта? Прогресс сохранится.')) {
-                // Сохраняем прогресс
                 save();
-                // Сбрасываем состояние
                 isLoggedIn = false;
                 vkUser = { id: null, name: 'Игрок', avatar: '' };
                 showLogin();
-                // Очищаем данные в localStorage (но не игровой прогресс)
-                // Показываем тост
                 showToast('👋 До встречи!');
             }
         }
 
         // ============================================================
-        // 8. ОБНОВЛЕНИЕ UI
+        // 6. ОБНОВЛЕНИЕ UI
         // ============================================================
-        function getCurrentBuff() {
-            return SKIN_MAP[state.currentSkin]?.buff || 1;
-        }
+        function getCurrentBuff() { return SKIN_MAP[state.currentSkin]?.buff || 1; }
 
         function getSkinSVG(skinId) {
             const skin = SKIN_MAP[skinId];
@@ -1292,29 +1255,23 @@
         function updateAll() {
             const buff = getCurrentBuff();
             const skin = SKIN_MAP[state.currentSkin] || SKIN_MAP['egg'];
-
             document.getElementById('coins').textContent = Math.floor(state.coins);
             document.getElementById('clickPower').textContent = state.clickPower;
             document.getElementById('multiplier').textContent = 'x' + buff;
-
             const clickCost = Math.floor(BASE_CLICK_COST * (1 + state.clickUpgradeLevel * 0.5));
             const autoCost = Math.floor(BASE_AUTO_COST * (1 + state.autoUpgradeLevel * 0.6));
             document.getElementById('upgradeCost').textContent = `Стоимость: ${clickCost} 🪙`;
             document.getElementById('autoCost').textContent = `Стоимость: ${autoCost} 🪙`;
-
             const eggEl = document.getElementById('egg');
             eggEl.className = 'egg rarity-' + skin.rarity;
             document.getElementById('eggContent').innerHTML = getSkinSVG(state.currentSkin);
             document.getElementById('buffIndicator').textContent = 'x' + skin.buff;
             document.getElementById('rarityGlow').style.background = skin.color + '33';
-
             document.getElementById('profileCoins').textContent = Math.floor(state.coins);
             document.getElementById('profileSkins').textContent = state.ownedSkins.length;
             document.getElementById('profileClicks').textContent = state.totalClicks;
-
             const statusSkin = SKIN_MAP[state.statusSkin] || SKIN_MAP['egg'];
             document.getElementById('profileStatus').textContent = statusSkin.emoji + ' ' + statusSkin.name;
-
             renderInventory();
             renderStatusGrid();
             renderDropPreview();
@@ -1322,7 +1279,6 @@
             updateCalendarUI();
             document.getElementById('refCount').textContent = state.refCount + ' друзей';
             document.getElementById('refLink').textContent = 'https://vk.com/app?ref=' + (vkUser.id || 'guest');
-
             document.getElementById('buyClick').disabled = state.coins < clickCost;
             document.getElementById('buyAuto').disabled = state.coins < autoCost;
         }
@@ -1339,7 +1295,7 @@
         }
 
         // ============================================================
-        // 9. ХРАНЕНИЕ
+        // 7. ХРАНЕНИЕ
         // ============================================================
         function save() {
             try {
@@ -1356,18 +1312,15 @@
                 const raw = localStorage.getItem('eggmony_auth');
                 if (raw) {
                     const saved = JSON.parse(raw);
-                    Object.keys(state).forEach(key => {
-                        if (saved[key] !== undefined) state[key] = saved[key];
-                    });
+                    Object.keys(state).forEach(key => { if (saved[key] !== undefined) state[key] = saved[key]; });
                 }
                 if (typeof VK !== 'undefined' && VK.WebApp && isVKApp) {
                     try {
                         VK.WebApp.getFromStorage('eggmony_auth', (data) => {
                             if (data && data.value) {
                                 const saved = JSON.parse(data.value);
-                                Object.keys(state).forEach(key => {
-                                    if (saved[key] !== undefined) state[key] = saved[key];
-                                });
+                                Object.keys(state).forEach(key => { if (saved[key] !== undefined) state[key] =
+                                    saved[key]; });
                                 updateAll();
                                 save();
                             }
@@ -1378,37 +1331,566 @@
         }
 
         // ============================================================
-        // 10. ВСЕ ОСТАЛЬНЫЕ ФУНКЦИИ (игровая логика)
+        // 8. ИНВЕНТАРЬ
         // ============================================================
-        // (здесь должны быть все функции игры: renderInventory, renderStatusGrid,
-        // renderDropPreview, openCase, claimDaily, claimCalendar, shareRef,
-        // updateDailyUI, updateCalendarUI, addCoins, handleEggClick, 
-        // buyClickUpgrade, buyAutoUpgrade, startAutoClick, showToast,
-        // showSkinModal, applySkin, sellSkin, giftSkin, sendGift, sendGiftById,
-        // giftCoins, sendCoins, sendCoinsById, shareResult, navigateTo)
+        function renderInventory() {
+            const grid = document.getElementById('inventoryGrid');
+            if (!state.ownedSkins || state.ownedSkins.length === 0) {
+                grid.innerHTML =
+                    '<div style="color:#666;font-size:12px;grid-column:span 4;text-align:center;padding:20px;">Пусто</div>';
+                return;
+            }
+            let html = '';
+            state.ownedSkins.forEach(skinId => {
+                const skin = SKIN_MAP[skinId];
+                if (!skin) return;
+                const isActive = state.currentSkin === skinId;
+                html += `
+              <div class="inv-item ${isActive ? 'selected' : ''}" data-skin="${skinId}" onclick="window.showSkinModal('${skinId}')">
+                <span class="inv-emoji">${skin.emoji}</span>
+                <div class="inv-name">${skin.name}</div>
+                <div class="inv-rarity" style="color:${getRarityColor(skin.rarity)}">${skin.rarity}</div>
+                <div class="inv-buff">x${skin.buff}</div>
+                ${isActive ? '<div class="inv-status">✅</div>' : ''}
+              </div>
+            `;
+            });
+            grid.innerHTML = html;
+        }
 
-        // Функции у меня уже есть в предыдущих версиях, но из-за ограничения длины
-        // я сократил их здесь. В полной версии они все есть.
-        // ============================================================
+        function getRarityColor(rarity) {
+            const map = { 'common': '#9e9e9e', 'uncommon': '#4caf50', 'rare': '#2196f3',
+                'epic': '#9c27b0', 'legendary': '#ff6f00', 'mythic': '#ff1744' };
+            return map[rarity] || '#fff';
+        }
 
         // ============================================================
-        // 11. ИНИЦИАЛИЗАЦИЯ
+        // 9. СТАТУСЫ
         // ============================================================
-        function init() {
-            // Проверяем OAuth (если вернулись с авторизации)
-            handleOAuth();
+        function renderStatusGrid() {
+            const grid = document.getElementById('statusGrid');
+            let html = '';
+            state.ownedSkins.forEach(skinId => {
+                const skin = SKIN_MAP[skinId];
+                if (!skin) return;
+                const isActive = state.statusSkin === skinId;
+                html += `
+              <div class="status-option ${isActive ? 'active' : ''}" onclick="setStatus('${skinId}')">
+                ${skin.emoji}
+                <span class="status-label">${skin.name.slice(0, 8)}</span>
+              </div>
+            `;
+            });
+            grid.innerHTML = html ||
+            '<div style="color:#666;font-size:11px;grid-column:span 6;text-align:center;">Нет скинов</div>';
+        }
 
-            // Проверяем, открыто ли в VK
-            if (checkVKApp()) {
-                initVKBridge();
-                // Если авторизовались в VK — показываем игру
-                if (isLoggedIn) {
-                    showGame();
+        window.setStatus = function(skinId) {
+            state.statusSkin = skinId;
+            save();
+            updateAll();
+            showToast('✅ Статус обновлён!');
+        };
+
+        // ============================================================
+        // 10. МОДАЛКА СКИНА
+        // ============================================================
+        window.showSkinModal = function(skinId) {
+            const skin = SKIN_MAP[skinId];
+            if (!skin) return;
+            const isActive = state.currentSkin === skinId;
+            const isBase = skinId === 'egg';
+            const overlay = document.createElement('div');
+            overlay.className = 'modal-overlay';
+            overlay.innerHTML = `
+            <div class="modal-content">
+              <div class="modal-emoji">${getSkinSVG(skinId)}</div>
+              <div class="modal-title">${skin.name}</div>
+              <div class="modal-desc">Редкость: ${skin.rarity.toUpperCase()}</div>
+              <div class="modal-desc" style="color:#4fc3f7;">⚡ Бафф: x${skin.buff} к силе</div>
+              <div class="modal-desc" style="font-size:12px;color:#888;">💰 Продажа: ${skin.sellPrice} монет</div>
+              <div class="modal-buttons">
+                ${!isActive ? `<button class="modal-btn" onclick="applySkin('${skinId}')">✅ Применить</button>` : 
+                             `<button class="modal-btn info" disabled>✅ Активен</button>`}
+                ${!isBase ? `<button class="modal-btn danger" onclick="sellSkin('${skinId}')">💰 Продать</button>` : ''}
+                <button class="modal-btn gift" onclick="giftSkin('${skinId}')">🎁 Подарить</button>
+              </div>
+              <button class="modal-close" onclick="this.closest('.modal-overlay').remove()">✕ Закрыть</button>
+            </div>
+          `;
+            document.body.appendChild(overlay);
+        };
+
+        window.applySkin = function(skinId) {
+            state.currentSkin = skinId;
+            save();
+            updateAll();
+            document.querySelector('.modal-overlay')?.remove();
+            showToast('✅ Скин применён!');
+            sound.play('bonus');
+        };
+
+        window.sellSkin = function(skinId) {
+            if (skinId === 'egg') { showToast('❌ Нельзя продать базовое!'); return; }
+            if (state.currentSkin === skinId) { showToast('❌ Сначала сними скин!'); return; }
+            const skin = SKIN_MAP[skinId];
+            const idx = state.ownedSkins.indexOf(skinId);
+            if (idx === -1) return;
+            state.ownedSkins.splice(idx, 1);
+            state.coins += skin.sellPrice;
+            save();
+            updateAll();
+            document.querySelector('.modal-overlay')?.remove();
+            showToast(`💰 Продано за ${skin.sellPrice} монет!`);
+            sound.play('bonus');
+        };
+
+        // ============================================================
+        // 11. ПОДАРКИ
+        // ============================================================
+        window.giftSkin = function(skinId) {
+            const skin = SKIN_MAP[skinId];
+            if (skinId === 'egg') { showToast('❌ Нельзя подарить базовое!'); return; }
+            if (state.currentSkin === skinId) { showToast('❌ Сначала сними скин!'); return; }
+            const overlay = document.createElement('div');
+            overlay.className = 'modal-overlay';
+            let friendsHtml = state.friends.map(f => `
+              <div class="friend-item" onclick="sendGift('${skinId}', ${f.id}, '${f.name}')">
+                <span class="friend-name">${f.name} ${f.online ? '🟢' : '⚪'}</span>
+                <span class="friend-select">+</span>
+              </div>
+            `).join('');
+            overlay.innerHTML = `
+              <div class="modal-content">
+                <div class="modal-emoji">🎁</div>
+                <div class="modal-title">Подарить ${skin.name}</div>
+                <div class="modal-desc">Выберите друга или введите ID</div>
+                <div class="gift-input">
+                  <input type="text" id="giftUserId" placeholder="ID пользователя" />
+                  <button class="modal-btn" onclick="sendGiftById('${skinId}')">Отправить</button>
+                </div>
+                <div class="friend-list">${friendsHtml || '<div style="color:#666;">Нет друзей</div>'}</div>
+                <button class="modal-close" onclick="this.closest('.modal-overlay').remove()">✕ Отмена</button>
+              </div>
+            `;
+            document.body.appendChild(overlay);
+        };
+
+        window.sendGift = function(skinId, friendId, friendName) {
+            const skin = SKIN_MAP[skinId];
+            const idx = state.ownedSkins.indexOf(skinId);
+            if (idx === -1) { showToast('❌ Нет скина'); return; }
+            state.ownedSkins.splice(idx, 1);
+            state.coins += 50;
+            save();
+            updateAll();
+            document.querySelector('.modal-overlay')?.remove();
+            showToast(`🎁 ${skin.name} подарено ${friendName}! +50 монет!`);
+            sound.play('bonus');
+        };
+
+        window.sendGiftById = function(skinId) {
+            const input = document.getElementById('giftUserId');
+            const userId = input?.value?.trim();
+            if (!userId) { showToast('❌ Введите ID'); return; }
+            const skin = SKIN_MAP[skinId];
+            const idx = state.ownedSkins.indexOf(skinId);
+            if (idx === -1) { showToast('❌ Нет скина'); return; }
+            state.ownedSkins.splice(idx, 1);
+            state.coins += 50;
+            save();
+            updateAll();
+            document.querySelector('.modal-overlay')?.remove();
+            showToast(`🎁 ${skin.name} подарено пользователю ${userId}! +50 монет!`);
+            sound.play('bonus');
+        };
+
+        window.giftCoins = function() {
+            const overlay = document.createElement('div');
+            overlay.className = 'modal-overlay';
+            let friendsHtml = state.friends.map(f => `
+              <div class="friend-item" onclick="sendCoins(${f.id}, '${f.name}')">
+                <span class="friend-name">${f.name} ${f.online ? '🟢' : '⚪'}</span>
+                <span class="friend-select">+</span>
+              </div>
+            `).join('');
+            overlay.innerHTML = `
+              <div class="modal-content">
+                <div class="modal-emoji">💰</div>
+                <div class="modal-title">Подарить монеты</div>
+                <div class="modal-desc">Сумма: <input type="number" id="giftAmount" value="100" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:4px 8px;color:#fff;width:80px;text-align:center;" /></div>
+                <div class="gift-input">
+                  <input type="text" id="giftCoinsUserId" placeholder="ID пользователя" />
+                  <button class="modal-btn" onclick="sendCoinsById()">Отправить</button>
+                </div>
+                <div class="friend-list">${friendsHtml || '<div style="color:#666;">Нет друзей</div>'}</div>
+                <button class="modal-close" onclick="this.closest('.modal-overlay').remove()">✕ Отмена</button>
+              </div>
+            `;
+            document.body.appendChild(overlay);
+        };
+
+        window.sendCoins = function(friendId, friendName) {
+            const amountInput = document.getElementById('giftAmount');
+            const amount = parseInt(amountInput?.value) || 100;
+            if (state.coins < amount) { showToast('❌ Недостаточно монет!'); return; }
+            state.coins -= amount;
+            save();
+            updateAll();
+            document.querySelector('.modal-overlay')?.remove();
+            showToast(`💰 ${amount} монет подарено ${friendName}!`);
+            sound.play('bonus');
+        };
+
+        window.sendCoinsById = function() {
+            const input = document.getElementById('giftCoinsUserId');
+            const userId = input?.value?.trim();
+            if (!userId) { showToast('❌ Введите ID'); return; }
+            const amountInput = document.getElementById('giftAmount');
+            const amount = parseInt(amountInput?.value) || 100;
+            if (state.coins < amount) { showToast('❌ Недостаточно монет!'); return; }
+            state.coins -= amount;
+            save();
+            updateAll();
+            document.querySelector('.modal-overlay')?.remove();
+            showToast(`💰 ${amount} монет подарено пользователю ${userId}!`);
+            sound.play('bonus');
+        };
+
+        // ============================================================
+        // 12. КЕЙСЫ
+        // ============================================================
+        function openCase(type) {
+            const prices = { cheap: 5000, medium: 15000, epic: 50000 };
+            const price = prices[type];
+            if (state.coins < price) { showToast(`❌ Нужно ${price} монет!`); return; }
+            state.coins -= price;
+            sound.play('case');
+            save();
+            updateAll();
+
+            let rewards = [];
+            if (type === 'cheap') {
+                rewards = [{ type: 'skin', rarity: 'common', weight: 35 }, { type: 'skin', rarity: 'uncommon',
+                        weight: 20 }, { type: 'skin', rarity: 'rare', weight: 8 }, { type: 'coins', amount: 500,
+                        weight: 25 }, { type: 'coins', amount: 1000, weight: 10 }, { type: 'power', amount: 1,
+                        weight: 2 }];
+            } else if (type === 'medium') {
+                rewards = [{ type: 'skin', rarity: 'uncommon', weight: 20 }, { type: 'skin', rarity: 'rare',
+                        weight: 25 }, { type: 'skin', rarity: 'epic', weight: 12 }, { type: 'skin',
+                        rarity: 'legendary', weight: 5 }, { type: 'coins', amount: 800, weight: 20 },
+                    { type: 'coins', amount: 1500, weight: 12 }, { type: 'power', amount: 2, weight: 6 }
+                ];
+            } else {
+                rewards = [{ type: 'skin', rarity: 'rare', weight: 20 }, { type: 'skin', rarity: 'epic',
+                        weight: 25 }, { type: 'skin', rarity: 'legendary', weight: 18 }, { type: 'skin',
+                        rarity: 'mythic', weight: 5 }, { type: 'coins', amount: 1500, weight: 15 },
+                    { type: 'coins', amount: 3000, weight: 10 }, { type: 'power', amount: 3, weight: 7 }
+                ];
+            }
+
+            const totalWeight = rewards.reduce((sum, r) => sum + r.weight, 0);
+            let rand = Math.random() * totalWeight;
+            let selected = rewards[0];
+            for (const r of rewards) {
+                rand -= r.weight;
+                if (rand <= 0) { selected = r; break; }
+            }
+            showCaseAnimation(selected);
+        }
+
+        function showCaseAnimation(reward) {
+            const overlay = document.createElement('div');
+            overlay.className = 'case-animation';
+            let emoji = '📦',
+                name = '...',
+                desc = '';
+            if (reward.type === 'skin') {
+                const available = ALL_SKINS.filter(s => s.rarity === reward.rarity && !state.ownedSkins.includes(s.id));
+                if (available.length === 0) {
+                    const bonus = reward.rarity === 'common' ? 300 : reward.rarity === 'uncommon' ? 500 :
+                        reward.rarity === 'rare' ? 800 : reward.rarity === 'epic' ? 1200 : 3000;
+                    state.coins += bonus;
+                    save();
+                    updateAll();
+                    showToast(`💰 Дубликат! +${bonus} монет`);
+                    overlay.remove();
+                    return;
+                }
+                const skin = available[Math.floor(Math.random() * available.length)];
+                state.ownedSkins.push(skin.id);
+                const currentRarity = SKIN_MAP[state.currentSkin]?.rarity || 'common';
+                const rarityOrder = ['common', 'uncommon', 'rare', 'epic', 'legendary', 'mythic'];
+                if (rarityOrder.indexOf(skin.rarity) > rarityOrder.indexOf(currentRarity)) { state.currentSkin = skin.id; }
+                emoji = skin.emoji;
+                name = skin.name;
+                desc = `Редкость: ${skin.rarity.toUpperCase()}\n⚡ Бафф: x${skin.buff}`;
+                save();
+                updateAll();
+            } else if (reward.type === 'coins') {
+                state.coins += reward.amount;
+                emoji = '💰';
+                name = `+${reward.amount} монет`;
+                desc = 'Отличный улов!';
+                save();
+                updateAll();
+            } else if (reward.type === 'power') {
+                state.clickPower += reward.amount;
+                emoji = '⚡';
+                name = `+${reward.amount} к силе клика`;
+                desc = 'Теперь ты сильнее!';
+                save();
+                updateAll();
+            }
+            overlay.innerHTML = `
+              <div class="case-result">
+                <div style="font-size:60px;margin-bottom:8px;">🎉</div>
+                <span class="result-emoji">${emoji}</span>
+                <div class="result-name">${name}</div>
+                <div class="result-desc">${desc}</div>
+                <button class="result-btn" onclick="this.closest('.case-animation').remove()">Отлично!</button>
+              </div>
+            `;
+            document.body.appendChild(overlay);
+            sound.play('bonus');
+        }
+
+        // ============================================================
+        // 13. БОНУСЫ
+        // ============================================================
+        function claimDaily() {
+            const now = Date.now();
+            const last = state.dailyBonus.lastClaim || 0;
+            if (now - last < 24 * 60 * 60 * 1000) { showToast('⏳ Уже получено!'); return; }
+            const bonus = 50 + (state.dailyBonus.streak || 0) * 5;
+            state.coins += bonus;
+            state.dailyBonus.lastClaim = now;
+            state.dailyBonus.streak = (state.dailyBonus.streak || 0) + 1;
+            sound.play('bonus');
+            save();
+            updateAll();
+            showToast(`🎁 +${bonus} монет! Стрик: ${state.dailyBonus.streak}`);
+        }
+
+        function claimCalendar() {
+            const now = Date.now();
+            const last = state.calendar.lastClaim || 0;
+            if (now - last < 24 * 60 * 60 * 1000) { showToast('⏳ Уже получено!'); return; }
+            const day = (state.calendar.day || 0) % 7;
+            const rewards = [30, 40, 50, 70, 100, 150, 200];
+            state.coins += rewards[day];
+            state.calendar.day = day + 1;
+            state.calendar.lastClaim = now;
+            sound.play('bonus');
+            save();
+            updateAll();
+            showToast(`📆 День ${day+1}: +${rewards[day]} монет!`);
+        }
+
+        function shareRef() {
+            const link = 'https://vk.com/app?ref=' + (vkUser.id || 'guest');
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(link);
+                showToast('📋 Ссылка скопирована!');
+            } else {
+                prompt('Скопируй ссылку:', link);
+            }
+            state.refCount += 1;
+            state.coins += 200;
+            save();
+            updateAll();
+            showToast('👥 +200 монет за приглашение!');
+        }
+
+        function updateDailyUI() {
+            const now = Date.now();
+            const last = state.dailyBonus.lastClaim || 0;
+            const diff = now - last;
+            const dayMs = 24 * 60 * 60 * 1000;
+            const btn = document.getElementById('dailyBtn');
+            const timer = document.getElementById('dailyTimer');
+            if (diff >= dayMs) {
+                btn.disabled = false;
+                timer.textContent = '✅ Доступно!';
+                timer.style.color = '#4caf50';
+            } else {
+                btn.disabled = true;
+                const remaining = dayMs - diff;
+                const hours = Math.floor(remaining / (60 * 60 * 1000));
+                const mins = Math.floor((remaining % (60 * 60 * 1000)) / (60 * 1000));
+                timer.textContent = `⏳ ${hours}ч ${mins}м`;
+                timer.style.color = '#666';
+            }
+        }
+
+        function updateCalendarUI() {
+            const now = Date.now();
+            const last = state.calendar.lastClaim || 0;
+            const day = state.calendar.day || 0;
+            const grid = document.getElementById('calendarGrid');
+            const btn = document.getElementById('calendarBtn');
+            const timer = document.getElementById('calendarTimer');
+            const rewards = [30, 40, 50, 70, 100, 150, 200];
+            let html = '';
+            for (let i = 0; i < 7; i++) {
+                const claimed = i < day;
+                const isToday = i === day && (now - last >= 24 * 60 * 60 * 1000);
+                html += `
+                <div class="cal-day ${claimed ? 'claimed' : ''} ${isToday ? 'today' : ''}">
+                  <span class="cal-emoji">${claimed ? '✅' : '📅'}</span>
+                  <span class="cal-daynum">${i+1}</span>
+                  <span style="font-size:8px;color:#ffd700;">+${rewards[i]}</span>
+                </div>
+              `;
+            }
+            grid.innerHTML = html;
+            if (day >= 7) {
+                btn.disabled = true;
+                timer.textContent = '🏆 Все дни получены!';
+                timer.style.color = '#ffd700';
+            } else if (now - last >= 24 * 60 * 60 * 1000) {
+                btn.disabled = false;
+                timer.textContent = `📆 День ${day+1}`;
+                timer.style.color = '#4caf50';
+            } else {
+                btn.disabled = true;
+                const remaining = 24 * 60 * 60 * 1000 - (now - last);
+                const hours = Math.floor(remaining / (60 * 60 * 1000));
+                timer.textContent = `⏳ ${hours}ч`;
+                timer.style.color = '#666';
+            }
+        }
+
+        // ============================================================
+        // 14. ИГРОВАЯ ЛОГИКА
+        // ============================================================
+        function addCoins(amount, x, y) {
+            const buff = getCurrentBuff();
+            const finalAmount = Math.floor(amount * buff);
+            state.coins += finalAmount;
+            state.totalClicks += 1;
+            if (x && y) {
+                const el = document.createElement('div');
+                el.className = 'float-text';
+                el.textContent = `+${finalAmount}`;
+                el.style.left = x + 'px';
+                el.style.top = y + 'px';
+                document.body.appendChild(el);
+                setTimeout(() => el.remove(), 900);
+            }
+            save();
+            updateAll();
+        }
+
+        function handleEggClick(e) {
+            sound.play('click');
+            const rect = document.getElementById('egg').getBoundingClientRect();
+            const x = e.clientX || (rect.left + rect.width / 2);
+            const y = e.clientY || (rect.top + rect.height / 2);
+            addCoins(state.clickPower, x - 20, y - 20);
+            if (navigator.vibrate) navigator.vibrate(10);
+        }
+
+        function buyClickUpgrade() {
+            const cost = Math.floor(BASE_CLICK_COST * (1 + state.clickUpgradeLevel * 0.5));
+            if (state.coins < cost) return;
+            state.coins -= cost;
+            state.clickPower += 1;
+            state.clickUpgradeLevel += 1;
+            save();
+            updateAll();
+            showToast('⚡ Сила клика +1!');
+        }
+
+        function buyAutoUpgrade() {
+            const cost = Math.floor(BASE_AUTO_COST * (1 + state.autoUpgradeLevel * 0.6));
+            if (state.coins < cost) return;
+            state.coins -= cost;
+            state.autoPower += 1;
+            state.autoUpgradeLevel += 1;
+            save();
+            updateAll();
+            showToast('🤖 Авто-кликер +1/сек!');
+        }
+
+        let autoInterval = null;
+
+        function startAutoClick() {
+            if (autoInterval) clearInterval(autoInterval);
+            autoInterval = setInterval(() => {
+                if (state.autoPower > 0) {
+                    const buff = getCurrentBuff();
+                    state.coins += Math.floor(state.autoPower * buff);
+                    save();
+                    updateAll();
+                }
+            }, 1000);
+        }
+
+        // ============================================================
+        // 15. ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
+        // ============================================================
+        function showToast(msg) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = msg;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2800);
+        }
+
+        function renderDropPreview() {
+            const container = document.getElementById('dropItems');
+            const rarities = ['common', 'uncommon', 'rare', 'epic', 'legendary', 'mythic'];
+            const icons = ['⚪', '🟢', '🔵', '🟣', '🟠', '🔴'];
+            const names = ['Обычный', 'Необычный', 'Редкий', 'Эпический', 'Легендарный', 'Мифический'];
+            let html = '';
+            html += `<div class="drop-item"><span class="drop-emoji">💰</span><span class="drop-name">500-3000</span></div>`;
+            html += `<div class="drop-item"><span class="drop-emoji">⚡</span><span class="drop-name">Сила +1-3</span></div>`;
+            rarities.forEach((r, i) => {
+                const has = ALL_SKINS.some(s => s.rarity === r);
+                if (has) {
+                    html +=
+                        `<div class="drop-item"><span class="drop-emoji">${icons[i]}</span><span class="drop-name">${names[i]}</span></div>`;
+                }
+            });
+            container.innerHTML = html;
+        }
+
+        function navigateTo(page) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-' + page).classList.add('active');
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`.nav-btn[data-page="${page}"]`).classList.add('active');
+            document.getElementById('content').scrollTop = 0;
+        }
+
+        function shareResult() {
+            const skin = SKIN_MAP[state.currentSkin] || SKIN_MAP['egg'];
+            if (typeof VK !== 'undefined' && VK.WebApp) {
+                try {
+                    VK.WebApp.showWallPostBox({
+                        message: `🥚 Мой прогресс в EGGMONEY!\n💰 Монет: ${Math.floor(state.coins)}\n⚡ Сила: ${state.clickPower}\n🤖 Авто: ${state.autoPower}/сек\n🌟 Бафф: x${skin.buff}\n🎨 Скин: ${skin.name} (${skin.rarity})\n🎒 Скинов: ${state.ownedSkins.length}\n\nПопробуй и ты! 🎮`,
+                        attachments: []
+                    });
+                } catch (e) {
+                    alert('🥚 EGGMONEY\n💰 ' + Math.floor(state.coins) + ' монет');
                 }
             } else {
-                // Если не в VK — показываем страницу входа
+                alert('🥚 EGGMONEY\n💰 ' + Math.floor(state.coins) + ' монет\n🌟 x' + skin.buff);
+            }
+        }
+
+        // ============================================================
+        // 16. ИНИЦИАЛИЗАЦИЯ
+        // ============================================================
+        function init() {
+            handleOAuth();
+
+            if (checkVKApp()) {
+                initVKBridge();
+                if (isLoggedIn) { showGame(); }
+            } else {
                 showLogin();
-                // Проверяем, есть ли уже сохранённый пользователь
                 const savedUser = localStorage.getItem('eggmony_user');
                 if (savedUser) {
                     try {
@@ -1424,28 +1906,39 @@
                 }
             }
 
-            // Кнопка входа
-            document.getElementById('loginBtn').addEventListener('click', function() {
-                loginViaVK();
-            });
+            document.getElementById('loginBtn').addEventListener('click', loginViaVK);
+            document.getElementById('logoutBtn').addEventListener('click', logout);
 
-            // Кнопка выхода
-            document.getElementById('logoutBtn').addEventListener('click', function() {
-                logout();
-            });
-
-            // Навигация
             document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    navigateTo(this.dataset.page);
-                });
+                btn.addEventListener('click', function() { navigateTo(this.dataset.page); });
             });
 
-            // Остальные обработчики событий...
-            // (здесь все остальные слушатели)
+            document.getElementById('egg').addEventListener('click', handleEggClick);
+            document.getElementById('buyClick').addEventListener('click', buyClickUpgrade);
+            document.getElementById('buyAuto').addEventListener('click', buyAutoUpgrade);
+
+            document.querySelectorAll('.case-card').forEach(btn => {
+                btn.addEventListener('click', function() { openCase(this.dataset.case); });
+            });
+
+            document.getElementById('dailyBtn').addEventListener('click', claimDaily);
+            document.getElementById('calendarBtn').addEventListener('click', claimCalendar);
+            document.getElementById('refBtn').addEventListener('click', shareRef);
+            document.getElementById('copyRefBtn').addEventListener('click', function() {
+                const link = document.getElementById('refLink').textContent;
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(link);
+                    showToast('📋 Ссылка скопирована!');
+                }
+            });
+
+            document.getElementById('shareBtn').addEventListener('click', shareResult);
+            document.getElementById('giftCoinsBtn').addEventListener('click', window.giftCoins);
+
+            setInterval(() => { updateDailyUI();
+                updateCalendarUI(); }, 60000);
         }
 
-        // Запуск
         if (document.readyState === 'complete') {
             init();
         } else {
@@ -1453,4 +1946,4 @@
         }
     </script>
 </body>
-                              </html>
+                    </html>
