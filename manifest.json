@@ -1,9 +1,10 @@
 {
   "manifest_version": "2.0",
-  "name": "EGGONOMY",
-  "description": "Clicker egg",
+  "name": "EGGMONEY",
+  "short_name": "EGGMONEY",
+  "description": "Кликер-РПГ с кейсами и скинами",
   "version": "1.0.0",
-  "author": "Твоё имя",
+  "author": "@r.markelov52",
   "platforms": ["ios", "android", "web"],
-  "permissions": ["storage", "wall", "friends"]
+  "permissions": ["storage", "wall", "friends", "photos"]
 }
